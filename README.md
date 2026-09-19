@@ -105,8 +105,8 @@ Frontend starts at: **http://localhost:3000**
 
 ##  Screenshots
 
-![Home](screenshots/train1.png)
-![Seat Reservation](screenshots/train2.png)
+![Home](screenshot/train1.png)
+![Seat Reservation](screenshot/train2.png)
 
 
 ---
