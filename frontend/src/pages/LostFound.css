@@ -1,0 +1,688 @@
+:root {
+  --primary-black: #111;
+  --secondary-black: #222;
+  --text-primary: #111;
+  --text-secondary: #333;
+  --text-meta: #666;
+  --bg-white: #ffffff;
+  --bg-light-gray: #f8f9fa;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --border-gray: #e1e5e9;
+  --accent-blue: #4285f4;
+  --accent-red: #ea4335;
+  --accent-green: #34a853;
+  --accent-orange: #fbbc04;
+  --accent-purple: #9c27b0;
+  --hover-gray: #f0f2f5;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.lf-container {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Remove background image - use light gray gradient */
+.lf-bg { 
+  display: none;
+}
+
+.lf-bg-img {
+  display: none;
+}
+
+.lf-overlay {
+  display: none;
+}
+
+/* Top bar - light gray styling matching dashboard */
+.lf-topbar {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #e9ecef 0%, #dee2e6 100%);
+  border-bottom: 1px solid #d6d8db;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.lf-brand {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+}
+
+.lf-brand:hover {
+  opacity: 0.8;
+}
+
+.lf-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lf-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lf-brand-text { 
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+.lf-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lf-btn-secondary {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.lf-btn-secondary:hover {
+  background: white;
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lf-profile-btn {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.lf-profile-btn:hover {
+  background: white;
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lf-profile-icon {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+.lf-profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Navigation tabs - matching dashboard style */
+.lf-tabs {
+  display: flex; 
+  gap: 1.5rem; 
+  padding: 2rem 2rem; 
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lf-tab {
+  color: var(--text-primary); 
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-gray);
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+}
+
+.lf-tab:hover { 
+  background: white;
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.lf-tab.active { 
+  background: var(--primary-black);
+  color: white;
+  border-color: var(--primary-black);
+  box-shadow: 0 6px 16px rgba(17, 17, 17, 0.4);
+}
+
+/* Hero section - clean light styling */
+.lf-hero { 
+  display: flex;
+  justify-content: space-between; /* changed back to space-between */
+  align-items: center;
+  padding: 2rem;
+  text-align: left; /* changed from center to left */
+}
+
+.lf-hero-content {
+  text-align: left; /* changed from center to left */
+  flex: 1; /* allow content to take available space */
+}
+
+.lf-hero-content h1 { 
+  margin: 0 0 0.5rem 0; 
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.2px; 
+}
+
+/* Remove the ::before pseudo-element */
+/* .lf-hero-content h1::before - REMOVED */
+
+/* Subtitle styling - simplified */
+.lf-hero-content p { 
+  margin: 0; 
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.lf-hero-actions {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem; /* add some space from the content */
+}
+
+.lf-add-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-gray);
+  color: var(--text-primary);
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin-top: 0; /* remove margin-top since it's now inline */
+  white-space: nowrap; /* prevent text wrapping */
+}
+
+.lf-add-btn:hover {
+  background: white;
+  border-color: var(--text-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Item type tabs */
+.lf-item-tabs {
+  display: flex;
+  gap: 1rem;
+  padding: 0 2rem 2rem 2rem;
+  justify-content: center;
+}
+
+.lf-item-tab {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-gray);
+  color: var(--text-primary);
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 120px;
+  text-align: center;
+}
+
+.lf-item-tab:hover {
+  background: white;
+  border-color: var(--text-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lf-item-tab.active {
+  background: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+/* Search */
+.lf-search {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.lf-search-input {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.lf-search-input input {
+  width: 100%;
+  background: white;
+  border: 1px solid var(--border-gray);
+  padding: 1rem 1rem 1rem 3rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.lf-search-input input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.lf-search-input input::placeholder {
+  color: var(--text-meta);
+  font-weight: 400;
+}
+
+.lf-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: var(--text-meta);
+}
+
+/* Items - clean white card styling */
+.lf-items {
+  padding: 1rem 2rem 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lf-item {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  background: white;
+  border: 1px solid var(--border-gray);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  backdrop-filter: none;
+  transition: all 0.3s ease;
+  box-shadow: var(--card-shadow);
+}
+
+.lf-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--text-secondary);
+}
+
+.lf-item-content {
+  flex: 1;
+}
+
+/* Ensure details stack neatly with some spacing */
+.lf-item-details .lf-detail + .lf-detail { margin-top: 0.4rem; }
+
+/* Position image on the far right, vertically centered */
+.lf-item-image {
+  align-self: center;
+}
+
+/* Compact layout for narrow screens */
+@media (max-width: 750px) {
+  .lf-item { flex-direction: column; }
+  .lf-item-image { align-self: flex-start; }
+}
+
+/* Side section holding image + meta (date & phone) */
+.lf-item-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1rem;
+}
+
+.lf-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 800px) {
+  .lf-item {
+    flex-wrap: wrap;
+  }
+  .lf-item-side {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .lf-item-meta {
+    flex-direction: row;
+    gap: 1.25rem;
+    align-items: center;
+  }
+}
+
+.lf-item h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lf-item p {
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.lf-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lf-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-meta);
+}
+
+.lf-detail-icon {
+  font-size: 1rem;
+  color: var(--accent-blue);
+}
+
+/* Enlarged image container */
+.lf-item-image {
+  width: 180px;
+  height: 180px;
+  background: var(--bg-light-gray);
+  border-radius: 24px; /* more rounded */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid var(--border-gray);
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.lf-item:hover .lf-item-image {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Image fills container */
+.lf-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  border-radius: 24px; /* keep corners smooth inside */
+}
+
+.lf-item-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Responsive downsizing for smaller viewports */
+@media (max-width: 900px) {
+  .lf-item-image { width: 150px; height: 150px; }
+  .lf-item-image img { border-radius: 20px; }
+}
+@media (max-width: 600px) {
+  .lf-item-image { width: 120px; height: 120px; }
+  .lf-item-image img { border-radius: 16px; }
+}
+
+/* Add accent colors to different item types */
+.lf-item[data-type="lost"] {
+  border-left: 4px solid var(--accent-red);
+}
+
+.lf-item[data-type="found"] {
+  border-left: 4px solid var(--accent-green);
+}
+
+/* Upload box in AddItem modal */
+.lf-upload-box {
+  width: 320px;
+  height: 220px;
+  border: 2px dashed #dbeafe;
+  border-radius: 12px;
+  background: #f8fafc;
+  position: relative;
+  overflow: hidden;              /* prevents big images from overflowing */
+}
+
+.lf-upload-box.has-preview {
+  border: 0;
+  background: transparent;
+}
+
+.lf-file-input {
+  position: absolute;
+  inset: 0;                      /* full overlay */
+  opacity: 0;
+  cursor: pointer;
+}
+
+.lf-upload-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  gap: 8px;
+  pointer-events: none;          /* clicks go to input underneath */
+}
+
+.lf-upload-btn {
+  pointer-events: none;          /* visual only; input handles click */
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #e2e8f0;
+  border: 0;
+}
+
+.lf-upload-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;           /* scale image inside the box */
+  display: block;
+}
+
+/* If you already render an <img> without wrapper, at least constrain it: */
+.lf-modal img {
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .lf-tabs {
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+  }
+  
+  .lf-tab {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .lf-topbar {
+    padding: 1rem;
+  }
+  
+  .lf-tabs {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+  
+  .lf-tab {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 120px;
+  }
+  
+  .lf-hero {
+    padding: 1.5rem 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .lf-hero-content {
+    text-align: center; /* center on mobile */
+  }
+  
+  .lf-hero-content h1 {
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem; /* adjust padding for mobile */
+    border-radius: 16px; /* smaller border radius for mobile */
+  }
+  
+  .lf-hero-actions {
+    margin-left: 0; /* remove left margin on mobile */
+  }
+  
+  .lf-item {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  
+  .lf-item-image {
+    align-self: center;
+  }
+  
+  .lf-search {
+    padding: 0 1rem 2rem 1rem;
+  }
+  
+  .lf-items {
+    padding: 1rem;
+  }
+}
+
+/* Focus states for accessibility */
+.lf-brand:focus,
+.lf-profile-btn:focus,
+.lf-tab:focus,
+.lf-item-tab:focus,
+.lf-add-btn:focus,
+.lf-btn-secondary:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* Hide any Ant Design dragger if present */
+.ant-upload-drag,
+.ant-upload-wrapper .ant-upload-drag {
+  display: none !important;
+}
+
+/* Remaining time coloring */
+.lf-remaining-time {
+  font-size: 12px;
+  margin: 2px 0 4px 0;
+  font-weight: 500;
+  transition: color .3s ease;
+}
+.lf-remaining-neutral { color: #64748b; }
+.lf-remaining-warning { color: #d97706; } /* amber-600 */
+.lf-remaining-danger { color: #b91c1c; } /* red-700 */
+.lf-remaining-expired { color: #6b7280; font-style: italic; }
+
+/* Login status display */
+.lf-user-status { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.lf-status-indicator { 
+  font-size: 14px; 
+  font-weight: 500; 
+  padding: 6px 12px; 
+  border-radius: 20px; 
+  background: rgba(255,255,255,0.9); 
+  border: 1px solid #e0e0e0; 
+  white-space: nowrap; 
+}
+
+.lf-status-indicator.logged-in { 
+  background: rgba(220,252,231,0.9); 
+  border-color: #86efac; 
+  color: #166534; 
+}
+
+.lf-status-indicator.guest { 
+  background: rgba(254,242,242,0.9); 
+  border-color: #fca5a5; 
+  color: #991b1b; 
+}
+
+.lf-logout {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}

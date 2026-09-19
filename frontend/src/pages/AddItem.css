@@ -1,0 +1,497 @@
+@import './LostFound.css'; /* Import base styles */
+
+:root {
+  --primary-black: #111;
+  --secondary-black: #222;
+  --text-primary: #111;
+  --text-secondary: #333;
+  --text-meta: #666;
+  --bg-white: #ffffff;
+  --bg-light-gray: #f8f9fa;
+  --border-gray: #e1e5e9;
+  --accent-blue: #4285f4;
+  --accent-red: #ea4335;
+  --accent-green: #34a853;
+  --accent-orange: #fbbc04;
+  --hover-gray: #f0f2f5;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content */
+.add-item-modal {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: auto; /* changed from max-height: 90vh */
+  overflow: visible; /* changed from overflow-y: auto */
+  animation: slideIn 0.3s ease;
+}
+
+/* Remove scrollbar hiding since we're removing scroll */
+/* .add-item-modal::-webkit-scrollbar {
+  display: none;
+} */
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.add-item-content {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--border-gray);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  max-height: 85vh; /* ensure it fits on screen */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Header */
+.add-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem; /* reduced from 1.5rem 2rem */
+  background: linear-gradient(90deg, #e9ecef 0%, #dee2e6 100%);
+  border-bottom: 1px solid var(--border-gray);
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+.add-item-header h2 {
+  margin: 0;
+  font-size: 1.3rem; /* reduced from 1.5rem */
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: var(--hover-gray);
+  color: var(--text-primary);
+}
+
+/* Form Layout - make it more compact */
+.add-item-form {
+  padding: 1.5rem; /* reduced from 2rem */
+  display: grid;
+  grid-template-columns: 1fr 280px; /* reduced from 300px */
+  gap: 1.5rem; /* reduced from 2rem */
+  flex: 1;
+  min-height: 0; /* allow flexbox to work properly */
+}
+
+.form-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* reduced from 1.5rem */
+}
+
+.form-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem; /* reduced from 0.5rem */
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.6rem 0.8rem; /* reduced padding */
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  font-size: 0.9rem; /* reduced font size */
+  color: var(--text-primary);
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px; /* reduced from 100px */
+  font-family: inherit;
+}
+
+/* Upload Area */
+.upload-area {
+  position: relative;              /* ensure children position inside */
+  overflow: hidden;                /* hide overflow */
+}
+
+.upload-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-area.has-image .upload-placeholder {
+  display: none;                   /* hide prompt when preview exists */
+}
+
+.upload-preview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;             /* fit inside without crop */
+  display: block;
+  border-radius: 10px;             /* matches box radius */
+}
+
+.upload-area {
+  border: 2px dashed var(--border-gray);
+  border-radius: 12px;
+  padding: 1rem; /* reduced from 2rem 1rem */
+  text-align: center;
+  background: var(--bg-light-gray);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 200px; /* reduced from 250px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-area:hover {
+  border-color: var(--accent-blue);
+  background: rgba(66, 133, 244, 0.05);
+}
+
+.upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem; /* reduced from 1rem */
+  color: var(--text-meta);
+}
+
+.upload-icon {
+  font-size: 1.5rem; /* reduced from 2rem */
+  color: var(--accent-blue);
+  font-weight: bold;
+}
+
+.upload-placeholder p {
+  margin: 0;
+  font-size: 0.9rem; /* reduced font size */
+  font-weight: 500;
+}
+
+/* Form Actions - more compact */
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 0.5rem; /* reduced from 1rem */
+  padding-top: 1rem; /* reduced from 1.5rem */
+  border-top: 1px solid var(--border-gray);
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 0.6rem 1.2rem; /* reduced padding */
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.cancel-btn {
+  background: white;
+  color: var(--text-secondary);
+  border-color: var(--border-gray);
+}
+
+.cancel-btn:hover {
+  background: var(--hover-gray);
+  border-color: var(--text-secondary);
+}
+
+.submit-btn {
+  background: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+.submit-btn:hover {
+  background: #3367d6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+/* New LF Modal Styles */
+.lf-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.lf-modal {
+  width: 820px;
+  max-width: 95vw;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+  overflow: hidden;
+}
+
+.lf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.lf-close {
+  background: none;
+  border: 0;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.lf-modal-content {
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.lf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.lf-modal-content label {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.lf-modal-content input,
+.lf-modal-content textarea {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.lf-modal-content textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.lf-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.lf-modal-actions button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+}
+
+.lf-modal-actions button[type="button"] {
+  background: #eef2f7;
+}
+
+.lf-modal-actions button[type="submit"] {
+  background: #111827;
+  color: #fff;
+}
+
+/* Upload (reverted to single lf-upload-box) */
+.lf-upload-box {
+  width: 320px;
+  height: 220px;
+  border: 2px dashed #cde1ff;
+  border-radius: 12px;
+  background: #f8fafc;
+  position: relative;
+  overflow: hidden;
+}
+.lf-upload-box.has-preview { border: 0; background: transparent; }
+.lf-file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.lf-upload-prompt {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #64748b; gap: 8px; pointer-events: none;
+}
+.lf-upload-btn { pointer-events: none; background: #e2e8f0; border-radius: 8px; padding: 6px 12px; border: 0; }
+.lf-upload-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 0.5rem;
+    align-items: flex-start; /* align to top on mobile */
+    padding-top: 1rem;
+  }
+  
+  .add-item-content {
+    border-radius: 12px;
+    max-height: 95vh; /* more height on mobile */
+  }
+  
+  .add-item-header {
+    padding: 1rem;
+  }
+  
+  .add-item-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .add-item-form {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .form-left {
+    gap: 0.8rem;
+  }
+  
+  .upload-area {
+    height: 150px;
+    padding: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+  
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-item-header {
+    padding: 0.8rem;
+  }
+  
+  .add-item-form {
+    padding: 0.8rem;
+  }
+  
+  .upload-area {
+    height: 120px;
+    padding: 0.8rem;
+  }
+  
+  .upload-placeholder {
+    gap: 0.3rem;
+  }
+  
+  .upload-icon {
+    font-size: 1.2rem;
+  }
+  
+  .upload-placeholder p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Focus trap for accessibility */
+.add-item-content:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
